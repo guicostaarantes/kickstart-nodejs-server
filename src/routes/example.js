@@ -1,12 +1,17 @@
-import { createSchema, updateSchema } from 'utils/schema/example'
+import { jwtMiddleware } from 'utils/strategy'
+import { createSchema, updateSchema } from 'schemas/example'
 import ExampleView from 'views/example'
 
-export default class ExampleRoute {
-  static load (app) {
-    app.get('/example/:id', ExampleView.read)
-    app.post('/example', createSchema.validate.bind(createSchema), ExampleView.create)
-    app.put('/example/:id', updateSchema.validate.bind(updateSchema), ExampleView.update)
-    app.delete('/example/:id', ExampleView.delete)
+class ExampleRoute {
+  load (app) {
+    app.get('/example/:id', jwtMiddleware, ExampleView.read)
+    app.post('/example', jwtMiddleware, createSchema.validate.bind(createSchema), ExampleView.create)
+    app.put('/example/:id', jwtMiddleware, updateSchema.validate.bind(updateSchema), ExampleView.update)
+    app.delete('/example/:id', jwtMiddleware, ExampleView.delete)
     app.get('/error/:id', ExampleView.error)
   }
 }
+
+const exampleRoute = new ExampleRoute()
+
+export default exampleRoute

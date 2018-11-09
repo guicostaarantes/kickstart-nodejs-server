@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
-    "debug-build": "babel src -d debug-dist --watch --source-maps &",
+    "debug-build": "babel src -d debug-dist --watch --source-maps",
     "build": "babel src -d dist"
   },
   "author": "guicostaarantes",
@@ -40,6 +40,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "jsonschema": "^1.2.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.9",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0"
   },

@@ -1,4 +1,4 @@
-import JSONValidator from 'utils/schema/validate'
+import JSONValidator from 'schemas/validate'
 
 export const createSchema = new JSONValidator({
   type: Object,

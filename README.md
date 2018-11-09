@@ -1,6 +1,6 @@
 # NodeJS Rest API Scaffolding
 
-This repo contain folder structure and example files for a user to quick-start a server using NodeJS, Express and MongoDB.
+This repo contains a folder structure and example files for a user to kick-start a server using NodeJS, Express and MongoDB.
 
 # Disclaimer
 
@@ -22,3 +22,8 @@ For all of the following functionalities to work, you should consider changing t
 - JSON schema validator
   - Includes a middleware that validates JSON in request bodies to avoid errors and hacker injections.
   - Create validation schemas following the example in `./src/utils/jsonschema/example.js`. Then import both the validation middleware (`./src/utils/jsonschema/validate.js`) and the schemas to the routes, and use them like the example in `./src/routes/example.js`
+- Passport authentication with Password and JsonWebToken
+  - Use the password provided by the user to authenticate them and retrieve a token. Then, use the token to access all the endpoints.
+  - Use the `jwtMiddleware` function in the routes to check for a token in the header: `{"Authorization": "Bearer INSERT_TOKEN_HERE"}`. If it's valid, the middleware will insert the content of the token in `req.user`.
+  - `jwtMiddleware` just checks whether the token is signed, whether the user is active and whether the token has expired. You still need to add extra middleware for cases like when only a certain user can do something (i.e.: only a resource owner may update such resource).
+  - Important: change the `secretKey` value in `./src/utils/config.js`. For safety, make it large and random, and do not distribute it.
