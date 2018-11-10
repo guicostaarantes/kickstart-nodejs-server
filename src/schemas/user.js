@@ -9,7 +9,7 @@ export const createSchema = new JSONValidator({
     },
     password: {
       type: String,
-      pattern: /^.{8,64}$/
+      pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\]).{8,}$/
     },
     language: {
       type: String
@@ -28,7 +28,7 @@ export const updateSchema = new JSONValidator({
     },
     password: {
       type: String,
-      pattern: /^.{8,64}$/
+      pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\]).{8,}$/
     },
     language: {
       type: String
