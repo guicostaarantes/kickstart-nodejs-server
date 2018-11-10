@@ -9,10 +9,11 @@ export const createSchema = new JSONValidator({
     },
     password: {
       type: String,
-      pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\]).{8,}$/
+      pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@$%^&*_+|~=`:;<>?,.]).{8,}$/
     },
     language: {
-      type: String
+      type: String,
+      pattern: /^[A-Z]{2}$/
     }
   },
   required: ['email', 'password', 'language'],
@@ -31,7 +32,8 @@ export const updateSchema = new JSONValidator({
       pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\]).{8,}$/
     },
     language: {
-      type: String
+      type: String,
+      pattern: /^[A-Z]{2}$/
     }
   },
   additionalProperties: false
