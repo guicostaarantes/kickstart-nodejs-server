@@ -2,6 +2,8 @@ import JSONValidator from 'schemas/validate'
 
 export const createSchema = new JSONValidator({
   type: Object,
+  required: ['email', 'password', 'language'],
+  additionalProperties: false,
   properties: {
     email: {
       type: String,
@@ -15,13 +17,12 @@ export const createSchema = new JSONValidator({
       type: String,
       pattern: /^[A-Z]{2}$/
     }
-  },
-  required: ['email', 'password', 'language'],
-  additionalProperties: false
+  }
 })
 
 export const updateSchema = new JSONValidator({
   type: Object,
+  additionalProperties: false,
   properties: {
     email: {
       type: String,
@@ -35,6 +36,5 @@ export const updateSchema = new JSONValidator({
       type: String,
       pattern: /^[A-Z]{2}$/
     }
-  },
-  additionalProperties: false
+  }
 })
