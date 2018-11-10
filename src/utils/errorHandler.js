@@ -4,13 +4,14 @@ import fs from 'fs'
 export default function errorHandler (err, req, res, next) {
   const errors = {
     1001: { statusCode: 500, message: 'Internal Server Error.' },
-    1002: { statusCode: 400, message: 'Bad Request.' },
+    1002: { statusCode: 400, message: 'JSON not valid for this request.' },
     1003: { statusCode: 401, message: 'Authentication failed.' },
     1004: { statusCode: 401, message: 'Token has expired.' },
-    1005: { statusCode: 404, message: 'Resource not found.' }
+    1005: { statusCode: 404, message: 'Resource not found.' },
+    1006: { statusCode: 400, message: 'Email already exists.' }
   }
-  if (Object.keys(errors).indexOf(err.message) !== -1 && err.message !== '1001') {
-    res.status(errors[err.message].statusCode).send(errors[err.message]).end()
+  if (Object.keys(errors).indexOf(err.message) !== -1 && !isNaN(err.message) && err.message !== '1001') {
+    res.status(errors[err.message].statusCode).send({ err: true, errCode: Number(err.message), ...errors[err.message] }).end()
   } else {
     const errLog = fs.createWriteStream(path.join(__dirname, '../../error.log'), { flags: 'a' })
     errLog.write(`
