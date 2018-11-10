@@ -18,6 +18,7 @@ For all of the following functionalities to work, you should consider changing t
   - If you want live reload with no debug, simply run `npm run dev`.
 - Error handling
   - At `./src/utils/errorHandler.js`, you will find an multitude of error messages to send to the user, which you should extend to meet your project needs.
+  - Errors are hardcoded. If you would like to manage errors on the fly, consider putting them in a database instead.
   - To throw a known error (like wrong password), simply write: `next(new Error(xxx))`, where xxx is the key in the error messages object.
   - You may also specify what errors should be logged in `./error.log`. By default it will log errors whose message is not in any key of the error message object (basically every error that you did not throw) and also errors with message 1001, which are errors you throw but usually require attention.
 - JSON schema validator

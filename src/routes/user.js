@@ -6,8 +6,8 @@ class UserRoute {
   load (app) {
     app.get('/user/:id', jwtMiddleware, UserView.read)
     app.post('/user', createSchema.validate.bind(createSchema), UserView.create)
-    app.put('/user/:id', jwtMiddleware, updateSchema.validate.bind(updateSchema), UserView.update)
-    app.delete('/user/:id', jwtMiddleware, UserView.deactivate)
+    app.put('/user', jwtMiddleware, updateSchema.validate.bind(updateSchema), UserView.update)
+    app.delete('/user', jwtMiddleware, UserView.deactivate)
   }
 }
 
