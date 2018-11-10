@@ -9,9 +9,10 @@ For all of the following functionalities to work, you should consider changing t
 
 # Functionalities
 
-- Write ES6 with linting and standardization
-  - Execute `npm run build` to tranpile your code into ES5 so it supports all versions of NodeJS. 
+- Write ES8 with linting and standardization
+  - Execute `npm run build` to transpile your code into ES5 so it supports all versions of NodeJS.
   - Linting and standardization will warn you about double-quotes, bad indentation, etc, to make your code clean and tidy.
+  - ESLint rules are set to endorse async/await over promises and callbacks, throwing errors. Those can be changed in `package.json` if you prefer using promises (please don't prefer callbacks :) ).
 - Live reload debugging in VSCode
   - For this to work you need to open a terminal and execute `npm run debug-build`.
   - If you want live reload with no debug, simply run `npm run dev`.
@@ -25,5 +26,9 @@ For all of the following functionalities to work, you should consider changing t
 - Passport authentication with Password and JsonWebToken
   - Use the password provided by the user to authenticate them and retrieve a token. Then, use the token to access all the endpoints.
   - Use the `jwtMiddleware` function in the routes to check for a token in the header: `{"Authorization": "Bearer INSERT_TOKEN_HERE"}`. If it's valid, the middleware will insert the content of the token in `req.user`.
-  - `jwtMiddleware` just checks whether the token is signed, whether the user is active and whether the token has expired. You still need to add extra middleware for cases like when only a certain user can do something (i.e.: only a resource owner may update such resource).
+  - `jwtMiddleware` just checks whether the token is valid (signed and not expired) and whether the user is active. You still need to add extra protection for cases like when only a certain user can do something (i.e.: only a resource owner may update such resource).
   - Important: change the `secretKey` value in `./src/utils/config.js`. For safety, make it large and random, and do not distribute it.
+- MongoDB
+  - Database choice is highly dependant on your project and your team expertise. A implementation of MongoDB is in this scaffolding just for the sake of making it work out of the box.
+  - In case you decide to go on with MongoDB, your collections can be changed by importing `./src/utils/mongodb.js` and using it in an async function (see example in `./src/views/user.js`).
+  - No schema related framework like mongoose was implemented, because I believe that JSON schema validation + clean code + testing is enough to guarantee consistency.

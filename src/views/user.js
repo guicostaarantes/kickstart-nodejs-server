@@ -5,13 +5,14 @@ class UserView {
     res.send('User is GETting example with id ' + req.params['id'])
   }
   create (req, res, next) {
-    mongodb.then(function (db) {
-      return db.collection('users').insertOne(req.body)
-    }).then(function () {
-      res.send(`User ${req.body.email} is POSTing a new example.`)
-    }).catch(function (err) {
+    try {
+      (async function () {
+        const db = await mongodb
+        db.collection('users').insertOne(req.body)
+      })()
+    } catch (err) {
       next(err)
-    })
+    }
   }
   update (req, res, next) {
     res.send('User is PUTting (updating) example with id ' + req.params['id'])

@@ -1,11 +1,9 @@
-import crypto from 'crypto'
+import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 class AuthView {
   checkPasswordSignToken (req, res, next) {
-    const hash = crypto.createHash('sha512')
-      .update(req.body.password)
-      .digest('base64')
+
   }
 }
 
