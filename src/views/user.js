@@ -3,8 +3,8 @@ import mongodb from 'utils/mongodb'
 
 class UserView {
   read (req, res, next) {
-    try {
-      (async function () {
+    (async function () {
+      try {
         const db = await mongodb
         const user = await db.collection('users').findOne({ username: req.params['id'] })
         if (!user || !user.active) next(new Error(1005))
@@ -15,14 +15,14 @@ class UserView {
         delete user.password
         delete user.active
         res.send({ err: false, user: user })
-      })()
-    } catch (err) {
-      next(err)
-    }
+      } catch (err) {
+        next(err)
+      }
+    })()
   }
   create (req, res, next) {
-    try {
-      (async function () {
+    (async function () {
+      try {
         const db = await mongodb
         const usernameAlreadyExists = await db.collection('users').findOne({ username: req.body.username })
         const emailAlreadyExists = await db.collection('users').findOne({ email: req.body.email })
@@ -33,14 +33,14 @@ class UserView {
           await db.collection('users').insertOne({ ...req.body, password: hash, active: true })
           res.send({ err: false, message: 'User created.' })
         }
-      })()
-    } catch (err) {
-      next(err)
-    }
+      } catch (err) {
+        next(err)
+      }
+    })()
   }
   update (req, res, next) {
-    try {
-      (async function () {
+    (async function () {
+      try {
         const db = await mongodb
         const usernameAlreadyExists = await db.collection('users').findOne({ username: req.body.username })
         if (usernameAlreadyExists) {
@@ -49,21 +49,21 @@ class UserView {
           await db.collection('users').updateOne({ _id: req.user.sub }, { $set: req.body })
           res.send({ err: false, message: 'User updated.' })
         }
-      })()
-    } catch (err) {
-      next(err)
-    }
+      } catch (err) {
+        next(err)
+      }
+    })()
   }
   deactivate (req, res, next) {
-    try {
-      (async function () {
+    (async function () {
+      try {
         const db = await mongodb
         await db.collection('users').updateOne({ _id: req.user.sub }, { $set: { active: false } })
         res.send({ err: false, message: 'User deactivated.' })
-      })()
-    } catch (err) {
-      next(err)
-    }
+      } catch (err) {
+        next(err)
+      }
+    })()
   }
   resetPassword (req, res, next) {
     res.send('User is changing password')
