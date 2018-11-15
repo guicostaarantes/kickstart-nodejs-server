@@ -23,7 +23,6 @@ export function jwtMiddleware (req, res, next) {
     else if (user) {
       req.user = user
       next()
-    }
-    else next(new Error(1001))
+    } else next(new Error(1005))
   })(req, res, next)
 }
